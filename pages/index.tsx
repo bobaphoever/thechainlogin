@@ -1,103 +1,80 @@
-import { ConnectWallet } from "@thirdweb-dev/react";
 import styles from "../styles/Home.module.css";
 import Image from "next/image";
+import EmailLogin from "../components/EmailLogin";
 import { NextPage } from "next";
+import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
+import { SocialLoginButton } from "../components/SocialLogin";
 
 const Home: NextPage = () => {
+  const address = useAddress();
+
+
   return (
-    <main className={styles.main}>
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <h1 className={styles.title}>
-            Welcome to{" "}
-            <span className={styles.gradientText0}>
-              <a
-                href="https://thirdweb.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                thirdweb.
-              </a>
-            </span>
-          </h1>
+    <div>
+      {address ? (
+        <ConnectWallet />
+      ) : (
+        <div style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100vh",
+        }}>
+          <div style={{
+            display: "flex",
+            flexDirection: "column",
+            width: "50%",
+            height: "100vh",
+          }}>
 
-          <p className={styles.description}>
-            Get started by configuring your desired network in{" "}
-            <code className={styles.code}>src/index.js</code>, then modify the{" "}
-            <code className={styles.code}>src/App.js</code> file!
-          </p>
-
-          <div className={styles.connect}>
-            <ConnectWallet />
-          </div>
-        </div>
-
-        <div className={styles.grid}>
-          <a
-            href="https://portal.thirdweb.com/"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              src="/images/portal-preview.png"
-              alt="Placeholder preview of starter"
-              width={300}
-              height={200}
-            />
-            <div className={styles.cardText}>
-              <h2 className={styles.gradientText1}>Portal ➜</h2>
-              <p>
-                Guides, references, and resources that will help you build with
-                thirdweb.
-              </p>
+         </div>
+         <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              padding: '0.5rem 1rem',
+              borderBottom: '1px solid #EEE',
+              height: '100%'
+            }}>
+              <div style={{
+                minWidth: "80%"
+              }}>
+                <h1>Welcome to The Chain</h1>
+                <EmailLogin />
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  width: '100%',
+                  height: '2rem',
+                  marginBottom: '1rem',
+                  color: '#CCC'
+                }}>
+                  <hr style={{ width: "45%", borderTop: "1px solid #CCC" }}/>
+                  <p>or</p>
+                  <hr style={{ width: "45%", borderTop: "1px solid #CCC" }} />
+                </div>
+                <SocialLoginButton strategy="google" />
+                <SocialLoginButton strategy="facebook" />
+                <SocialLoginButton strategy="apple" />
+              </div>
             </div>
-          </a>
-
-          <a
-            href="https://thirdweb.com/dashboard"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              src="/images/dashboard-preview.png"
-              alt="Placeholder preview of starter"
-              width={300}
-              height={200}
-            />
-            <div className={styles.cardText}>
-              <h2 className={styles.gradientText2}>Dashboard ➜</h2>
-              <p>
-                Deploy, configure, and manage your smart contracts from the
-                dashboard.
-              </p>
-            </div>
-          </a>
-
-          <a
-            href="https://thirdweb.com/templates"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              src="/images/templates-preview.png"
-              alt="Placeholder preview of templates"
-              width={300}
-              height={200}
-            />
-            <div className={styles.cardText}>
-              <h2 className={styles.gradientText3}>Templates ➜</h2>
-              <p>
-                Discover and clone template projects showcasing thirdweb
-                features.
-              </p>
-            </div>
-          </a>
-        </div>
-      </div>
-    </main>
+         <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '50%',
+          height: '100vh',
+          backgroundColor: '#EEE',
+          backgroundImage: 'url(https://th.bing.com/th/id/OIG1.ltIMBM7MxLJ7pWlTF9TA?pid=ImgGn)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+         }}></div>
+        </div> 
+      )}
+    </div>
   );
 };
 
